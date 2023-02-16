@@ -21,7 +21,7 @@ $ npm install mysqljs/mysql
 
 --------------------------------------------
 
-Dotenv (github.com/motdotla/dotenv)
+Dotenv (https://github.com/motdotla/dotenv)
 
 ```sh
 $ npm install dotenv --save

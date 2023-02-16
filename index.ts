@@ -1,4 +1,4 @@
-import { Query } from './utils/Query';
+import { Query } from './src/utils/Query';
 
 export const selectWhereSQL = (res: object, table: string, column: string[], values: any[]): Promise<any> => {
   return new Query(res, table).selectWhereSQL(res, table, column, values);
