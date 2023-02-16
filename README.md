@@ -46,54 +46,49 @@ npm i node-mysql-queries
 ## Usage
 
 ### SELECT * FROM table_name
+res = controller response
+table_name = string (table name)
 ```typescript
-//res = controller response
-//table_name = string (table name)
 selectAllSQL(res, 'table_name')
 ```
 
 ### SELECT * FROM table_name WHERE column_name = value
+res = controller response
+table_name = string (table name)
+columns = string array (columns name) You can use multiple column like ['col1', 'col2']
+values = array (values) You can use multiple value like [1, 'val2']
 ```typescript
-//res = controller response
-//table_name = string (table name)
-//table_name = string array (columns name) You can use multiple column like ['col1', 'col2']
-//value = array (values) You can use multiple value like [1, 'val2']
-selectWhereSQL(res, 'table_name', ['column_name'], [value])
+selectWhereSQL(res, 'table_name', ['column_name'], [values])
 ```
 
-### Usage enum2array function
-
+### INSERT INTO posts SET id = 1, title = 'Hello World'
+res = controller response
+table_name = string (table name)
+value = object for example: {id: 1, title: 'Hello World'}
 ```typescript
-import { enum2array } from "enum2array";
-console.log(enum2array(CustomType));
-console.log(enum2array(CustomValue));
+insertSQL(res, 'table_name', {value})
+```
+
+### UPDATE teble_name SET col1 = val1, col2 = val2 WHERE id = 1
+res = controller response
+table = string (table name)
+columns = string array (columns name) You can use multiple column like ['col1', 'col2']
+values = array (values) You can use multiple value like [1, 'val2']
+where = string like (id = 1)
+```typescript
+updateSQL(res, 'table', ['columns'], [values], 'where')
+```
+
+### DELETE FROM table_name WHERE column = value
+res = controller response
+table_name = string (table name)
+column = string (column name)
+value = string (value)
+```typescript
+deleteSQL(res, 'table_name', 'column', 'value')
 ```
 
 ## Results
-
-### That is the result about function with "CustomType" enum
-
-```
-(4) [ArrayValue, ArrayValue, ArrayValue, ArrayValue]
-0: ArrayValue {title: "TypeA", value: 1}
-1: ArrayValue {title: "TypeB", value: 2}
-2: ArrayValue {title: "TypeC", value: 3}
-3: ArrayValue {title: "TypeD", value: 4}
-length: 4
-__proto__: Array(0)
-```
-
-### That is the result about function with "CustomValue" enum
-
-```
-(4) [ArrayValue, ArrayValue, ArrayValue, ArrayValue]
-0: ArrayValue {title: "TypeA", value: "valueA"}
-1: ArrayValue {title: "TypeB", value: "valueB"}
-2: ArrayValue {title: "TypeC", value: "valueC"}
-3: ArrayValue {title: "TypeD", value: "valueD"}
-length: 4
-__proto__: Array(0)
-```
 
 ### Want to contribute?
 You can read and follow our [CONTRIBUTING.md](CONTRIBUTING.md) and report it using
