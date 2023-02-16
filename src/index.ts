@@ -23,7 +23,7 @@ export class Query implements IQueryValue {
    */
   selectAllSQL = async (res = this.res, table = this.table): Promise<any> => {
     const sql = `SELECT *  FROM ${table}`;
-    const rows = await mySqlConnection.query(sql, function (error: any, results: any) {
+    const rows = await mySqlConnection.query(sql, (error: any, results: any) => {
       if (error) {
         if (error.code === 'ER_NO_SUCH_TABLE') {
           return new Response().error404(res);
@@ -45,18 +45,19 @@ export class Query implements IQueryValue {
    * @param {array} values SQL sorgusunda WHERE değerleri
    */
   selectWhereSQL = async (res = this.res, table = this.table, column: string[], values: any[]) => {
-    var cols = '';
-    for (var i = 0; i < column.length; i++) {
+    let cols = '';
+    let clause = '';
+    for (let i = 0; i < column.length; i++) {
       if (i > 0) {
-        var clause = ' AND `' + column[i] + '` = ?';
+        clause = ' AND `' + column[i] + '` = ?';
         cols += clause;
       } else {
-        var clause = '`' + column[i] + '` = ?';
+        clause = '`' + column[i] + '` = ?';
         cols += clause;
       }
     }
     const sql = `SELECT * FROM ${table} WHERE ${cols}`;
-    const rows = await mySqlConnection.query({ sql, timeout: 40000, values }, function (error: any, results: any) {
+    const rows = await mySqlConnection.query({ sql, timeout: 40000, values }, (error: any, results: any) => {
       if (error) return new Response().error400(res);
       if (!results.length) return new Response().error404(res);
       return new Response(results).success(res);
@@ -72,7 +73,7 @@ export class Query implements IQueryValue {
    */
   insertSQL = async (res = this.res, table = this.table, values: object): Promise<any> => {
     const sql = `INSERT INTO ${table} SET ?`;
-    var rows = await mySqlConnection.query(sql, values, function (error: any, results: any) {
+    const rows = await mySqlConnection.query(sql, values, (error: any, results: any) => {
       if (error) return new Response().error400(res);
       if (results.affectedRows > 0) return new Response().created(res);
     });
@@ -89,17 +90,18 @@ export class Query implements IQueryValue {
    * @param {string} where SQL sorgusunun where clause si (id = 1)
    */
   updateSQL = async (res = this.res, table = this.table, columns: string[], values: any[], where: string) => {
-    var cols = '';
-    for (var i = 0; i < columns.length; i++) {
+    let cols = '';
+    let clause = '';
+    for (let i = 0; i < columns.length; i++) {
       if (i !== columns.length - 1) {
-        var clause = columns[i] + ' = ?, ';
+        clause = columns[i] + ' = ?, ';
       } else {
-        var clause = columns[i] + ' = ? ';
+        clause = columns[i] + ' = ? ';
       }
       cols += clause;
     }
     const sql = `UPDATE ${table} SET ${cols} WHERE ${where}`;
-    const rows = await mySqlConnection.query(sql, values, function (error: any, results: any, fields: any) {
+    const rows = await mySqlConnection.query(sql, values, (error: any, results: any, fields: any) => {
       if (error) return new Response().error400(res);
       if (results.affectedRows === 0) return new Response().error404(res);
       if (results.affectedRows > 0) return new Response().success(res);
@@ -117,7 +119,7 @@ export class Query implements IQueryValue {
    */
   deleteSQL = async (res = this.res, table = this.table, column: string, value: string) => {
     const sql = `DELETE FROM ${table} WHERE ${column} = ${value}`;
-    const rows = await mySqlConnection.query(sql, function (error: any, results: any) {
+    const rows = await mySqlConnection.query(sql, (error: any, results: any) => {
       if (error) return new Response().error400(res);
       if (results.affectedRows === 0) return new Response().error404(res);
       if (results.affectedRows > 0) return new Response().success(res);
