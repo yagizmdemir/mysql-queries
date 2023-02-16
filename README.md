@@ -5,7 +5,7 @@
 
  ![GitHub Repo stars](https://img.shields.io/github/stars/sametcelikbicak/enum2array?style=social) -->
  
-Functions to help sql queries from Node.js to MySQL.
+Functions to help SQL queries from Node.js to MySQL.
 </div>
 
 ## Installation
@@ -13,7 +13,7 @@ Functions to help sql queries from Node.js to MySQL.
 ```
 npm i mysql-queries
 ```
-
+<!-- 
 ## Usage
 
 ### Define an enum for testing
@@ -64,7 +64,7 @@ __proto__: Array(0)
 3: ArrayValue {title: "TypeD", value: "valueD"}
 length: 4
 __proto__: Array(0)
-```
+``` -->
 
 ### Want to contribute?
 You can read and follow our [CONTRIBUTING.md](CONTRIBUTING.md) and report it using
