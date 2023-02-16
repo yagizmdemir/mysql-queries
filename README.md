@@ -8,28 +8,57 @@
 Functions to help SQL queries from Node.js to MySQL.
 </div>
 
+## Pre-Requirements
+MySQL js (https://github.com/mysqljs/mysql)
+
+```sh
+$ npm install mysql
+```
+or
+```sh
+$ npm install mysqljs/mysql
+```
+
+--------------------------------------------
+
+Dotenv (github.com/motdotla/dotenv)
+
+```sh
+$ npm install dotenv --save
+```
+
+--------------------------------------------
+
+Create .env file like or add lines to your .env file;
+```
+DB_HOST=your_db_host
+DB_USER=your_db_username
+DB_PASSWORD=your_db_password
+DB_DATABASE=your_db_database_name
+```
+
 ## Installation
 
 ```
-npm i mysql-queries
+npm i node-mysql-queries
 ```
-<!-- 
+
 ## Usage
 
-### Define an enum for testing
+### SELECT * FROM table_name
 ```typescript
-export enum CustomType {
-    TypeA = 1,
-    TypeB = 2,
-    TypeC = 3,
-    TypeD = 4,
-}
-export enum CustomValue {
-    TypeA = "valueA",
-    TypeB = "valueB",
-    TypeC = "valueC",
-    TypeD = "valueD",
-}
+//res = controller response
+//table_name = string (table name)
+selectAllSQL(res, 'table_name')
+```
+
+### SELECT * FROM table_name WHERE column_name = value
+```typescript
+//res = controller response
+//table_name = string (table name)
+//table_name = string array (columns name) You can use multiple column like ['col1', 'col2']
+//value = array (values) You can use multiple value like [1, 'val2']
+selectWhereSQL(res, 'table_name', ['column_name'], [value])
 ```
 
 ### Usage enum2array function
@@ -64,7 +93,7 @@ __proto__: Array(0)
 3: ArrayValue {title: "TypeD", value: "valueD"}
 length: 4
 __proto__: Array(0)
-``` -->
+```
 
 ### Want to contribute?
 You can read and follow our [CONTRIBUTING.md](CONTRIBUTING.md) and report it using
